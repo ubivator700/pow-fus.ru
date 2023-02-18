@@ -31,3 +31,10 @@ class Users(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class Analytic(models.Model):
+    income = models.IntegerField(default=0, blank=False)
+    expenses = models.IntegerField(default=0, blank=False)
+    revenue = models.IntegerField(default=0, blank=False)
+    data = models.JSONField()

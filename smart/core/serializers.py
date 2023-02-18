@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Companies, Users
+from core.models import Companies, Users, Analytic
 
 
 class CompaniesSerializer(serializers.ModelSerializer):
@@ -11,6 +11,12 @@ class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
         fields = ['id', 'name', 'role', 'avatar', 'company_name']
+
+
+class AnalyticSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Analytic
+        fields = ['income', 'expenses', 'revenue', 'data']
 
 # class SnippetSerializer(serializers.Serializer):
 #     id = serializers.ImageField(read_only=True)

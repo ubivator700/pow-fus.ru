@@ -1,8 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from core.models import Companies, Users
-from core.serializers import CompaniesSerializer, UsersSerializer
+from core.models import Companies, Users, Analytic
+from core.serializers import CompaniesSerializer, UsersSerializer, AnalyticSerializer
 
 @csrf_exempt
 def users_list(request):
@@ -55,3 +55,14 @@ def company_detail(request, pk):
     if request.method == 'GET':
         serializer = CompaniesSerializer(owner)
         return JsonResponse(serializer.data) 
+    
+
+def analytic(request):
+    try:
+        analytic = Analytic.objects.all()
+    except Analytic.DoesNotExist:
+        return HttpResponse(status=404)
+    
+    if request.method == 'GET':
+        serializer = AnalyticSerializer(analytic)
+        return JsonResponse(serializer.data)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Users, Companies
+from .models import Users, Companies, Analytic
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
@@ -8,3 +8,7 @@ class UsersAdmin(admin.ModelAdmin):
 @admin.register(Companies)
 class CompaniesAdmin(admin.ModelAdmin):
     exclude=('company_id',)
+
+@admin.register(Analytic)
+class AnalyticAdmin(admin.ModelAdmin):
+    pass

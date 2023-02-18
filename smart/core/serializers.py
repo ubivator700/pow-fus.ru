@@ -10,7 +10,7 @@ class CompaniesSerializer(serializers.ModelSerializer):
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = Users
-        fields = ['user_id', 'user_name', 'user_role', 'user_photo', 'company_name']
+        fields = ['id', 'name', 'role', 'avatar', 'company_name']
 
 # class SnippetSerializer(serializers.Serializer):
 #     id = serializers.ImageField(read_only=True)

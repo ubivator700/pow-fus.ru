@@ -3,7 +3,7 @@ from .models import Users, Companies
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
-    exclude=('user_id',)
+    exclude=('id',)
 
 @admin.register(Companies)
 class CompaniesAdmin(admin.ModelAdmin):

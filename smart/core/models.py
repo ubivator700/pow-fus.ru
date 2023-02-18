@@ -22,7 +22,7 @@ class Companies(models.Model):
 class Users(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, blank=False, default='Пользователь')
-    company_name = models.ForeignKey(Companies, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=200, default='company')
     avatar = models.TextField()
     role = models.TextField(choices=USER_ROLE_CHOICE, default='manager')
 

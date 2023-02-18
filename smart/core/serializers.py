@@ -1,11 +1,16 @@
 from rest_framework import serializers
-from core.models import Owners
+from core.models import Companies, Users
 
 
-class OwnerSerializer(serializers.ModelSerializer):
+class CompaniesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Owners
-        fields = ['id', 'owner_name', 'role']
+        model = Companies
+        fields = ['company_id', 'company_name']
+
+class UsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Users
+        fields = ['user_id', 'user_name', 'user_role', 'user_photo', 'company_name']
 
 # class SnippetSerializer(serializers.Serializer):
 #     id = serializers.ImageField(read_only=True)

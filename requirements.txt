@@ -6,3 +6,4 @@ djangorestframework
 Markdown
 pytz
 sqlparse
+Pillow

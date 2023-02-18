@@ -1,4 +1,4 @@
-smartenv\
+smartenv/
 passenger_wsgi.py
 __pycache__
 cgi-bin

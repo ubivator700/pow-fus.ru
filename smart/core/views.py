@@ -68,7 +68,7 @@ def analytics_list(request):
     if request.method == 'GET':
         snippets = Analytic.objects.all()
         serializer = AnalyticSerializer(snippets, many=True)
-        return JsonResponse([serializer.data], safe=False)
+        return JsonResponse('{"data": '+serializer.data+'}', safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)

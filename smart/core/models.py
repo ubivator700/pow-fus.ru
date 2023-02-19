@@ -8,6 +8,12 @@ USER_ROLE_CHOICE = [
 ]
 
 
+ACTION_TYPE_CHOISE = [
+    ('ai','ai'),
+    ('search', 'search')
+]
+
+
 class Companies(models.Model):
     company_id = models.AutoField(primary_key=True)
     company_name = models.CharField(max_length=200, blank=True, default='')
@@ -38,6 +44,15 @@ class Analytic(models.Model):
     price = models.IntegerField(default=0, blank=False)
     series = models.JSONField()
     type = models.TextField(default='line')
+
+    def __str__(self):
+        return self.name
+    
+
+class Action(models.Model):
+    name = models.CharField(max_length=200, default='search')
+    type = models.TextField(choices=ACTION_TYPE_CHOISE, default='search')
+    redirect = models.TextField()
 
     def __str__(self):
         return self.name

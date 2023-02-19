@@ -1,8 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from core.models import Companies, Users, Analytic
-from core.serializers import CompaniesSerializer, UsersSerializer, AnalyticSerializer
+from core.models import Companies, Users, Analytic, Action
+from core.serializers import CompaniesSerializer, UsersSerializer, AnalyticSerializer, ActionSerializer
 from rest_framework import viewsets
 
 
@@ -91,6 +91,37 @@ def analytics_detail(request, name):
         return JsonResponse([serializer.data]) 
     
 
+def action_list(request):
+    if request.method == 'GET':
+        snippets = Action.objects.all()
+        serializer = ActionSerializer(snippets, many=True)
+        data = serializer.data
+        return JsonResponse(data,safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = ActionSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
+
+def action_detail(request, name):
+    try:
+        owner = Action.objects.get(name=name)
+    except Action.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = ActionSerializer(owner)
+        return JsonResponse(serializer.data)
+    
+
 class AnalyticViewSet(viewsets.ModelViewSet):
     queryset = Analytic.objects.all()
     serializer_class = AnalyticSerializer
+
+class ActionViewSet(viewsets.ModelViewSet):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Users, Companies, Analytic
+from .models import Users, Companies, Analytic, Action
 
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
@@ -11,4 +11,9 @@ class CompaniesAdmin(admin.ModelAdmin):
 
 @admin.register(Analytic)
 class AnalyticAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Action)
+class ActionAdmin(admin.ModelAdmin):
     pass

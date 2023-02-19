@@ -50,9 +50,11 @@ class Analytic(models.Model):
     
 
 class Action(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200, default='search')
     type = models.TextField(choices=ACTION_TYPE_CHOISE, default='search')
     redirect = models.TextField()
+    series = models.JSONField(default=dict)
 
     def __str__(self):
         return self.name

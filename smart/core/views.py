@@ -75,7 +75,7 @@ def analytics_list(request):
         serializer = AnalyticSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
+            return JsonResponse([serializer.data], status=201)
         return JsonResponse(serializer.errors, status=400)
     
 
@@ -87,7 +87,7 @@ def analytics_detail(request, name):
 
     if request.method == 'GET':
         serializer = AnalyticSerializer(owner)
-        return JsonResponse(serializer.data) 
+        return JsonResponse([serializer.data]) 
     
 
 class AnalyticViewSet(viewsets.ModelViewSet):

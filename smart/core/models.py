@@ -37,6 +37,7 @@ class Analytic(models.Model):
     name = models.CharField(max_length=200, default='chart')
     price = models.IntegerField(default=0, blank=False)
     series = models.JSONField()
+    type = models.TextField(default='line')
 
     def __str__(self):
         return self.name

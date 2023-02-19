@@ -16,7 +16,7 @@ class UsersSerializer(serializers.ModelSerializer):
 class AnalyticSerializer(serializers.ModelSerializer):
     class Meta:
         model = Analytic
-        fields = ['name', 'price', 'series']
+        fields = ['name', 'price', 'series', 'type']
 
 # class SnippetSerializer(serializers.Serializer):
 #     id = serializers.ImageField(read_only=True)

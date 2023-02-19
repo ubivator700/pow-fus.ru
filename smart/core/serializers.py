@@ -22,7 +22,7 @@ class AnalyticSerializer(serializers.ModelSerializer):
 class ActionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Action
-        fields = ['id', 'name', 'type', 'redirect', 'series']
+        fields = ['id', 'name', 'type', 'redirect', 'series', 'redirect']
 
 # class SnippetSerializer(serializers.Serializer):
 #     id = serializers.ImageField(read_only=True)

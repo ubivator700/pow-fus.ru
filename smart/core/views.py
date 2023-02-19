@@ -79,6 +79,17 @@ def analytics_list(request):
         return JsonResponse(serializer.errors, status=400)
     
 
+def analytics_detail(request, name):
+    try:
+        owner = Analytic.objects.get(name=name)
+    except Analytic.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = AnalyticSerializer(owner)
+        return JsonResponse(serializer.data) 
+    
+
 class AnalyticViewSet(viewsets.ModelViewSet):
     queryset = Analytic.objects.all()
     serializer_class = AnalyticSerializer

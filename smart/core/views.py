@@ -3,6 +3,13 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from core.models import Companies, Users, Analytic
 from core.serializers import CompaniesSerializer, UsersSerializer, AnalyticSerializer
+from rest_framework import viewsets
+
+
+class UsersViewSet(viewsets.ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializer
+
 
 @csrf_exempt
 def users_list(request):
@@ -57,12 +64,21 @@ def company_detail(request, pk):
         return JsonResponse(serializer.data) 
     
 
-def analytic(request):
-    try:
-        analytic = Analytic.objects.all()
-    except Analytic.DoesNotExist:
-        return HttpResponse(status=404)
-    
+def analytics_list(request):
     if request.method == 'GET':
-        serializer = AnalyticSerializer(analytic)
-        return JsonResponse(serializer.data)
+        snippets = Analytic.objects.all()
+        serializer = AnalyticSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = AnalyticSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+    
+
+class AnalyticViewSet(viewsets.ModelViewSet):
+    queryset = Analytic.objects.all()
+    serializer_class = AnalyticSerializer

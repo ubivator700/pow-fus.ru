@@ -34,7 +34,9 @@ class Users(models.Model):
     
 
 class Analytic(models.Model):
-    income = models.IntegerField(default=0, blank=False)
-    expenses = models.IntegerField(default=0, blank=False)
-    revenue = models.IntegerField(default=0, blank=False)
-    data = models.JSONField()
+    name = models.CharField(max_length=200, default='chart')
+    price = models.IntegerField(default=0, blank=False)
+    series = models.JSONField()
+
+    def __str__(self):
+        return self.name

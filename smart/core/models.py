@@ -54,7 +54,7 @@ class Action(models.Model):
     name = models.CharField(max_length=200, default='search')
     type = models.TextField(choices=ACTION_TYPE_CHOISE, default='search')
     redirect = models.TextField()
-    series = models.JSONField(default=dict)
+    series = models.TextField(blank=True)
     redirect = models.CharField(max_length=200, default='/analytic')
 
     def __str__(self):
